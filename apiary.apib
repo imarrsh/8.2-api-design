@@ -1,0 +1,158 @@
+FORMAT: 1A
+
+# Majestic Thai
+
+Majestic Thai API is a simple API allowing the restuarants customers to view menu data and place orders via the website ordering system.
+
+## Menu Items Collection [/dishes]
+
+### List All Menu Items [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "581391d5a01f27000381c308",
+                "category" : "Noodles",
+                "name": "Pad Thai",
+                "description": "One of the most famous Thai rice noodles dish cooked with egg, bean spouts, tofu and sprinkled with ground peanut.",
+                "price": 10.5
+            },{
+                "_id" : "581391d5a01f27000381c306",
+                "category" : "Beverages",
+                "name": "Thai Tea",
+                "description": "Classic Thai Tea",
+                "price": 3
+            },{
+                "_id" : "581391d5a01f27000381c30a",
+                "category": "Appetizer",
+                "name": "Edamame",
+                "description": "Steamed young soy bean.",
+                "price": 4.95
+            }
+        ]
+
+
+## Menu Item by ID [/dishes/{id}]
+
++ Parameters
+    + id (hash) - ID of the order represented by a hashed index (Mongo DB)
+
+### Single Menu Item Listing [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "581391d5a01f27000381c308",
+                "category" : "Noodles",
+                "name": "Pad Thai",
+                "description": "One of the most famous Thai rice noodles dish cooked with egg, bean spouts, tofu and sprinkled with ground peanut.",
+                "price": 10.5
+            }
+        ]
+
+
+## Orders Collection [/orders]
+
+### Submit an Order [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "_id": "581772f725c06a0003d0f0b9",
+                "name": "John",
+                "method": "pickup",
+                "invoice": 31.20,
+                "time": "Tue Nov 01 2016 22:14:07 GMT-0400 (EDT)",
+                "items": [
+                            {
+                                "name": "Spicy Fried Rice",
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30e"
+                            }, {
+                                "name": "Spicy Eggplant",
+                                "price": 10.5,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30d"
+                            }, {
+                                "name": "Thai Beef Noodle Soup", 
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30f"
+                            }
+                        ]
+            }
+        ]
+
++ Response 201 (text/plain)
+    
+    + Headers
+        
+            Location: /orders/581772f725c06a0003d0f0b9
+
+
+
+### List All Active Orders [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "_id": "581772f725c06a0003d0f0b9",
+                "name": "John",
+                "method": "pickup",
+                "invoice": 31.20,
+                "time": "Tue Nov 01 2016 23:25:54 GMT-0400 (EDT)",
+                "items": [
+                            {
+                                "name": "Spicy Fried Rice",
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30e"
+                            }, {
+                                "name": "Spicy Eggplant",
+                                "price": 10.5,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30d"
+                            }, {
+                                "name": "Thai Beef Noodle Soup", 
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30f"
+                            }
+                        ]
+            },
+            {
+                "_id": "5816aab5e5ef250003415953",
+                "name": "Steve",
+                "method": "pickup",
+                "invoice": 35.8,
+                "time": "Tue Nov 01 2016 23:26:54 GMT-0400 (EDT)",
+                "items": [
+                            {
+                                "name": "Thai Beef Noodle Soup",
+                                "price": 9.95, 
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30f"
+                            },{
+                                "name": "Spicy Fried Rice",
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30e"
+                            },{
+                                "name": "Spicy Eggplant",
+                                "price": 10.5,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30d"
+                            },{
+                                "name": "Thai Tea",
+                                "price": 3,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c306"
+                            } 
+                        ]
+            }
+        ]
