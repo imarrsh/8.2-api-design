@@ -36,7 +36,7 @@ Majestic Thai API is a simple API allowing the restuarants customers to view men
 ## Menu Item by ID [/dishes/{id}]
 
 + Parameters
-    + id (hash) - ID of the order represented by a hashed index (Mongo DB)
+    + _id (string) - ID of the dish represented by a hashed index (Mongo DB)
 
 ### Single Menu Item Listing [GET]
 
@@ -156,3 +156,53 @@ Majestic Thai API is a simple API allowing the restuarants customers to view men
                         ]
             }
         ]
+
+
+## Order by ID [/orders/{id}]
+
++ Parameters
+    + _id (string) - ID of the order represented by a hashed index (Mongo DB)
+
+### List An Active Order [GET]
+
++ Response 200 (application/json)
+        
+        [
+            {
+                "_id": "581772f725c06a0003d0f0b9",
+                "name": "John",
+                "method": "pickup",
+                "invoice": 31.20,
+                "time": "Tue Nov 01 2016 23:25:54 GMT-0400 (EDT)",
+                "items": [
+                            {
+                                "name": "Spicy Fried Rice",
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30e"
+                            }, {
+                                "name": "Spicy Eggplant",
+                                "price": 10.5,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30d"
+                            }, {
+                                "name": "Thai Beef Noodle Soup", 
+                                "price": 9.95,
+                                "quantity": 1,
+                                "id": "581391d5a01f27000381c30f"
+                            }
+                        ]
+            },
+        ]
+
++ Response 201 (text/plain)
+    
+    + Headers
+        
+            Location: /orders/581772f725c06a0003d0f0b9
+
+
+
+### Complete An Active Order [DELETE]
+
++ Response 204
